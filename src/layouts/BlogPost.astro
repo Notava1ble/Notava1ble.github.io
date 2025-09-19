@@ -14,25 +14,25 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
     <BaseHead title={title} description={description} />
   </head>
 
-  <body class="w-full">
-    <main class="w-full">
-      <article class="prose prose-lg mx-auto">
-        <div class="hero-image">
-          {
-            heroImage && (
+  <body class="w-full dark">
+    <main class="w-full pt-32">
+      <article class="prose prose-invert mx-auto">
+        {
+          heroImage && (
+            <div class="hero-image">
               <Image width={1020} height={510} src={heroImage} alt="" />
-            )
-          }
-        </div>
-        <div class="prose">
-          <div class="title">
-            <div class="date">
+            </div>
+          )
+        }
+        <div>
+          <div>
+            <div>
               <FormattedDate date={pubDate} />
               {
                 updatedDate && (
-                  <div class="last-updated-on">
+                  <sub>
                     Last updated on <FormattedDate date={updatedDate} />
-                  </div>
+                  </sub>
                 )
               }
             </div>
