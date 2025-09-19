@@ -37,9 +37,9 @@
   --sidebar-accent-foreground: oklch(0.2046 0 0);
   --sidebar-border: oklch(0.9276 0.0058 264.5313);
   --sidebar-ring: oklch(0.2046 0 0);
-  --font-sans: Inter;
-  --font-serif: Lora;
-  --font-mono: Fira Code;
+  --font-sans: "Inter Variable", sans-serif;
+  --font-serif: "Lora Variable", serif;
+  --font-mono: "Fira Code Variable", monospace;
   --radius: 0.5rem;
   --shadow-2xs: 0px 4px 10px 0px hsl(0 0% 0% / 0.05);
   --shadow-xs: 0px 4px 10px 0px hsl(0 0% 0% / 0.05);
@@ -91,9 +91,9 @@
   --sidebar-accent-foreground: oklch(0.9851 0 0);
   --sidebar-border: oklch(0.2686 0 0);
   --sidebar-ring: oklch(0.9851 0 0);
-  --font-sans: Inter;
-  --font-serif: Lora;
-  --font-mono: Fira Code;
+  --font-sans: "Inter Variable", sans-serif;
+  --font-serif: "Lora Variable", serif;
+  --font-mono: "Fira Code Variable", monospace;
   --radius: 0.5rem;
   --shadow-2xs: 0px 4px 15px 0px hsl(0 0% 0% / 0.13);
   --shadow-xs: 0px 4px 15px 0px hsl(0 0% 0% / 0.13);
