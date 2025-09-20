@@ -21,97 +21,14 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Universal from "@/layouts/Universal.astro";
+import Header from "@/components/sections/Header.astro";
+import About from "@/components/sections/About.astro";
+import Seperator from "@/components/common/Seperator.astro";
 ---
 
 <Universal>
-  <Card className="max-w-1/2 mx-auto mt-12 text-lg">
-    <CardHeader>
-      <CardTitle>Table of Random content</CardTitle>
-      <CardDescription>
-        Just a simple table with random content that have no meaning
-      </CardDescription>
-    </CardHeader>
-    <CardContent>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Name</TableHead>
-            <TableHead>Description</TableHead>
-            <TableHead>Category</TableHead>
-            <TableHead>Price</TableHead>
-          </TableRow>
-          <TableBody>
-            <TableRow>
-              <TableCell>Apple</TableCell>
-              <TableCell>Fresh red apple</TableCell>
-              <TableCell>Fruit</TableCell>
-              <TableCell>$1.00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Banana</TableCell>
-              <TableCell>Ripe yellow banana</TableCell>
-              <TableCell>Fruit</TableCell>
-              <TableCell>$0.50</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Carrot</TableCell>
-              <TableCell>Organic carrot</TableCell>
-              <TableCell>Vegetable</TableCell>
-              <TableCell>$0.30</TableCell>
-            </TableRow>
-          </TableBody>
-        </TableHeader>
-      </Table>
-    </CardContent>
-    <CardFooter className="justify-center">
-      <CardAction>
-        <Button>Acknowledge this</Button>
-      </CardAction>
-    </CardFooter>
-  </Card>
-  <Card className="max-w-1/2 mx-auto mt-12 text-lg">
-    <CardHeader>
-      <CardTitle>Table of Random content</CardTitle>
-      <CardDescription>
-        Just a simple table with random content that have no meaning
-      </CardDescription>
-    </CardHeader>
-    <CardContent>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Name</TableHead>
-            <TableHead>Description</TableHead>
-            <TableHead>Category</TableHead>
-            <TableHead>Price</TableHead>
-          </TableRow>
-          <TableBody>
-            <TableRow>
-              <TableCell>Apple</TableCell>
-              <TableCell>Fresh red apple</TableCell>
-              <TableCell>Fruit</TableCell>
-              <TableCell>$1.00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Banana</TableCell>
-              <TableCell>Ripe yellow banana</TableCell>
-              <TableCell>Fruit</TableCell>
-              <TableCell>$0.50</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Carrot</TableCell>
-              <TableCell>Organic carrot</TableCell>
-              <TableCell>Vegetable</TableCell>
-              <TableCell>$0.30</TableCell>
-            </TableRow>
-          </TableBody>
-        </TableHeader>
-      </Table>
-    </CardContent>
-    <CardFooter className="justify-center">
-      <CardAction>
-        <Button>Acknowledge this</Button>
-      </CardAction>
-    </CardFooter>
-  </Card>
+  <Header />
+  <Seperator />
+  <About />
+  <Seperator />
 </Universal>
