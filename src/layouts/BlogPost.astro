@@ -3,45 +3,40 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import Universal from "./Universal.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
-<html lang="en">
-  <head>
-    <BaseHead title={title} description={description} />
-  </head>
-
-  <body class="w-full dark">
-    <main class="w-full pt-32">
-      <article class="prose prose-invert mx-auto">
-        {
-          heroImage && (
-            <div class="hero-image">
-              <Image width={1020} height={510} src={heroImage} alt="" />
-            </div>
-          )
-        }
+<Universal title={title} description={description}>
+  <main class="w-full pt-32">
+    <article class="prose prose-invert max-w-1/2 mx-auto">
+      {
+        heroImage && (
+          <div class="hero-image">
+            <Image width={1020} height={510} src={heroImage} alt="" />
+          </div>
+        )
+      }
+      <div>
         <div>
           <div>
-            <div>
-              <FormattedDate date={pubDate} />
-              {
-                updatedDate && (
-                  <sub>
-                    Last updated on <FormattedDate date={updatedDate} />
-                  </sub>
-                )
-              }
-            </div>
-            <h1>{title}</h1>
-            <hr />
+            <FormattedDate date={pubDate} />
+            {
+              updatedDate && (
+                <small>
+                  Last updated on <FormattedDate date={updatedDate} />
+                </small>
+              )
+            }
           </div>
-          <slot />
+          <h1>{title}</h1>
+          <hr />
         </div>
-      </article>
-    </main>
-  </body>
-</html>
+        <slot />
+      </div>
+    </article>
+  </main>
+</Universal>

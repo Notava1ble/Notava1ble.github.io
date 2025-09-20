@@ -1,46 +1,49 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import BaseHead from "../../components/BaseHead.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import Universal from "@/layouts/Universal.astro";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body class="dark">
-    <main>
-      <section>
-        <ul>
-          {
-            posts.map((post) => (
-              <li>
-                <a href={`/blog/${post.id}/`}>
-                  {post.data.heroImage && (
-                    <Image
-                      width={720}
-                      height={360}
-                      src={post.data.heroImage}
-                      alt=""
-                    />
-                  )}
-                  <h4 class="title">{post.data.title}</h4>
-                  <p class="date">
+<Universal>
+  <main class="w-1/2 mx-auto">
+    <section class="prose prose-invert">
+      <h1>Recent Blog Posts</h1>
+      <div>
+        {
+          posts.map((post) => (
+            <a href={`/blog/${post.id}/`} class="no-underline font-normal">
+              <Card className="max-w-full w-full">
+                <CardHeader>
+                  <CardTitle>{post.data.title}</CardTitle>
+                  <CardDescription>
                     <FormattedDate date={post.data.pubDate} />
-                  </p>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </section>
-    </main>
-  </body>
-</html>
+                  </CardDescription>
+                </CardHeader>
+
+                {/* {post.data.heroImage && (
+                  <Image
+                    width={720}
+                    height={360}
+                    src={post.data.heroImage}
+                    alt=""
+                  />
+                )} */}
+              </Card>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</Universal>
