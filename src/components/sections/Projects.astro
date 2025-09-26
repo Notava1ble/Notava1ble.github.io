@@ -47,18 +47,24 @@ const projects = [
     {
       projects.map((project, i) => {
         return i === 0 ? (
-          <Card className="p-6 flex-center gap-6 col-span-2 group">
+          <Card className="p-6 flex-center gap-6 col-span-2 group relative">
             <div class="flex-1 overflow-clip rounded-md relative h-full">
               <img
                 src={`https://placehold.co/800x450/f1f1f1/333333?text=${encodeURIComponent(
                   project.title
                 )}&font=roboto`}
                 alt={project.title}
-                class="object-cover w-full rounded-md group-hover:scale-105 transition-all duration-200"
+                class="object-cover w-full rounded-md group-hover:scale-105 transition-all duration-200 group-hover:brightness-20"
               />
-              {/* <p class="w-full bg-linear-0 from-card/50 to-transparent flex-center gap-2 absolute pb-2 pt-8 bottom-0 left-1/2 -translate-x-1/2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                Read More <ArrowRight />
-              </p> */}
+              <a
+                href={`/projects/${project.title.toLowerCase().replace(/\s+/g, "-")}`}
+                class={cn(
+                  buttonVariants({ variant: "link" }),
+                  "absolute top-1/2 left-1/2 -translate-1/2 z-100 hidden group-hover:inline-flex text-xl group-hover:underline"
+                )}
+              >
+                Read More <ArrowRight className="size-6" />
+              </a>
             </div>
             <div class="flex-1 h-full flex flex-col items-start justify-between">
               <div class="space-y-2">
@@ -80,7 +86,7 @@ const projects = [
                   View Live
                 </a>
                 <a
-                  href={project.link}
+                  href={project.code}
                   target="_blank"
                   class={cn(buttonVariants({ variant: "link" }))}
                 >
@@ -91,20 +97,32 @@ const projects = [
             </div>
           </Card>
         ) : (
-          <Card>
+          <Card className="group">
             <CardHeader>
               <CardTitle>{project.title}</CardTitle>
               <CardDescription>{project.description}</CardDescription>
             </CardHeader>
             <CardContent>
-              <AspectRatio ratio={16 / 9} className="overflow-clip rounded-md">
+              <AspectRatio
+                ratio={16 / 9}
+                className="overflow-clip rounded-md relative"
+              >
                 <img
                   src={`https://placehold.co/800x450/f1f1f1/333333?text=${encodeURIComponent(
                     project.title
                   )}&font=roboto`}
                   alt={project.title}
-                  class="object-cover w-full rounded-md hover:scale-105 hover:filter transition-transform duration-200"
+                  class="object-cover w-full rounded-md group-hover:scale-105 group-hover:brightness-20 transition-all duration-200"
                 />
+                <a
+                  href={`/projects/${project.title.toLowerCase().replace(/\s+/g, "-")}`}
+                  class={cn(
+                    buttonVariants({ variant: "link" }),
+                    "absolute top-1/2 left-1/2 -translate-1/2 z-100 hidden group-hover:inline-flex text-xl group-hover:underline"
+                  )}
+                >
+                  Read More <ArrowRight className="size-6" />
+                </a>
               </AspectRatio>
             </CardContent>
             <CardFooter className="justify-between">
@@ -119,7 +137,7 @@ const projects = [
               </a>
               <a
                 class="flex gap-2 text-sm text-muted-foreground hover:underline items-center"
-                href={project.link}
+                href={project.code}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -132,9 +150,9 @@ const projects = [
       })
     }
   </div>
-  <small
+  <!-- <small
     class="w-fit mx-auto flex-center gap-2 hover:gap-4 transition-all text-muted-foreground mt-4"
   >
     View All <ArrowRight className="size-4" />
-  </small>
+  </small> -->
 </section>
