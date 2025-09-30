@@ -1,0 +1,109 @@
+---
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Textarea } from "../ui/textarea";
+---
+
+<section class="w-1/2 mx-auto max-w-full mt-16 space-y-10" id="contact">
+  <div class="text-muted-foreground space-y-2">
+    <h2 class="font-semibold text-2xl">Contact</h2>
+    <p>
+      I'm currently open to new opportunities and collaborations. Feel free to
+      reach out by filling out the form or using the contact details below.
+    </p>
+    <ul class="space-y-1 list-disc list-inside">
+      <li>
+        <strong>Email:</strong>
+        <a href="mailto:visarmullaj07@gmail.com" class="hover:underline">
+          visarmullaj07@gmail.com
+        </a>
+      </li>
+      <li>
+        <strong>Location:</strong> Tirana, Albania
+      </li>
+    </ul>
+  </div>
+  <form class="flex-1 space-y-8" id="contact-form">
+    <div class="w-full space-y-2">
+      <Label htmlFor="name">Name</Label>
+      <Input
+        placeholder="your.email@example.com"
+        id="email"
+        id="name"
+        name="name"
+        type="text"
+        required
+      />
+    </div>
+    <div class="w-full space-y-2">
+      <Label htmlFor="email">Email</Label>
+      <Input
+        placeholder="youremail@example.com"
+        id="email"
+        name="email"
+        type="email"
+        required
+      />
+    </div>
+    <div class="w-full space-y-2">
+      <Label htmlFor="message">Your message</Label>
+      <Textarea
+        placeholder="Type your message here."
+        id="message"
+        name="message"
+        className="min-h-28"
+        required
+      />
+    </div>
+    <Button type="submit" className="w-full">Send Message</Button>
+  </form>
+
+  <script>
+    interface FormData {
+      name: string;
+      email: string;
+      message: string;
+    }
+
+    const form = document.getElementById("contact-form") as HTMLFormElement;
+
+    form.addEventListener("submit", (e: Event) => {
+      e.preventDefault();
+
+      const data: FormData = {
+        name: (
+          document.getElementById("name") as HTMLInputElement
+        ).value.trim(),
+        email: (
+          document.getElementById("email") as HTMLInputElement
+        ).value.trim(),
+        message: (
+          document.getElementById("message") as HTMLTextAreaElement
+        ).value.trim(),
+      };
+
+      if (!data.name || !data.email || !data.message) {
+        alert("Please fill out all fields.");
+        return;
+      }
+
+      // Encode for mailto URL
+      const subject = encodeURIComponent(`Message from ${data.name}`);
+      const body = encodeURIComponent(
+        `Hello, my name is ${data.name}\n\n${data.message}`
+      );
+
+      const mailtoLink = `mailto:visarmullaj07@gmail.com?subject=${subject}&body=${body}`;
+
+      // Try opening the mailto link
+      const newWindow = window.open(mailtoLink, "_blank");
+
+      if (!newWindow) {
+        alert(
+          "Could not open your email client. Please copy your message and send it manually to visarmullaj07@gmail.com"
+        );
+      }
+    });
+  </script>
+</section>
