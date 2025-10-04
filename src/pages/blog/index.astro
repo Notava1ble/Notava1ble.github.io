@@ -44,7 +44,7 @@ const posts = (await getCollection("blog")).sort(
                   class="text-base font-medium leading-snug text-gray-100"
                 >
                   <a
-                    href={`/blog/${post.data.title}`}
+                    href={`/blog/${post.id}`}
                     class="focus:outline-none focus-visible:ring-1 focus-visible:ring-gray-500 rounded-sm hover:underline"
                   >
                     {post.data.title}
