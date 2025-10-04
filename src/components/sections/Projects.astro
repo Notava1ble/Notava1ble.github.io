@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
 
 import projects from "@/lib/data/projects";
+import { Image } from "astro:assets";
 ---
 
 <section class="w-1/2 mx-auto max-w-full mt-16" id="projects">
@@ -29,7 +30,7 @@ import projects from "@/lib/data/projects";
         return i === 0 ? (
           <Card className="p-6 flex-center gap-6 col-span-2 group relative">
             <div class="flex-1 overflow-clip rounded-md relative h-full">
-              <img
+              <Image
                 src={project.imagePath}
                 alt={project.title}
                 class="object-cover w-full rounded-md group-hover:scale-105 transition-all duration-200 group-hover:brightness-20"
@@ -91,7 +92,7 @@ import projects from "@/lib/data/projects";
                 ratio={16 / 9}
                 className="overflow-clip rounded-md relative"
               >
-                <img
+                <Image
                   src={project.imagePath}
                   alt={project.title}
                   class="object-cover w-full rounded-md group-hover:scale-105 group-hover:brightness-20 transition-all duration-200"

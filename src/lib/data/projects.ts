@@ -12,7 +12,7 @@ const projects = [
     status: "Production",
     link: "https://hangman-ranked.vercel.app/",
     code: "https://github.com/Notava1ble/hangman-ranked",
-    imagePath: hangmanImg.src,
+    imagePath: hangmanImg,
   },
   {
     title: "Ai Flashcards",
@@ -21,7 +21,7 @@ const projects = [
       "A script that uses the gemini api to generate flashcards from a set of notes.",
     status: "Not maintained",
     code: "https://github.com/Notava1ble/aiflashcards",
-    imagePath: aiFlashcardsImg.src,
+    imagePath: aiFlashcardsImg,
   },
   {
     title: "Formulate",
@@ -30,7 +30,7 @@ const projects = [
       "Create a collection to store all your notes. Designed for simplicity and quick access",
     status: "Work in progress",
     code: "https://github.com/Notava1ble/formulate",
-    imagePath: formulateImg.src,
+    imagePath: formulateImg,
   },
 ];
 
