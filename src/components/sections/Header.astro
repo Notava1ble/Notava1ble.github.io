@@ -1,11 +1,11 @@
 ---
 import { AspectRatio } from "../ui/aspect-ratio";
-import { Button, buttonVariants } from "../ui/button";
-import { Skeleton } from "../ui/skeleton";
+import { buttonVariants } from "../ui/button";
+import { cn } from "@/lib/utils";
 
 import GitHubIcon from "../../assets/icons/brand-github.svg";
 import LinkedInIcon from "../../assets/icons/brand-linkedin.svg";
-import { cn } from "@/lib/utils";
+import currentlyWorkngOn from "@/lib/data/currentlyWorkongOn";
 ---
 
 <header class="w-1/2 mx-auto flex mt-16 gap-4">
@@ -17,9 +17,8 @@ import { cn } from "@/lib/utils";
       <p class="text-muted-foreground text-lg">Web Developer</p>
     </div>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
-      hendrerit rhoncus risus ac malesuada. Aenean ultrices turpis ut sagittis
-      laoreet.
+      Self-taught developer with 2+ years of experience focused on building
+      meaningful, usable apps, not just aimless projects.
     </p>
     <div class="flex gap-3">
       <a
@@ -40,9 +39,18 @@ import { cn } from "@/lib/utils";
     </div>
   </div>
   <div class="flex-1 text-center space-y-3">
-    <AspectRatio ratio={3 / 2}>
-      <Skeleton className="w-full h-full rounded-lg" />
-    </AspectRatio>
-    <p>Currently working on</p>
+    <a href={currentlyWorkngOn.link}>
+      <AspectRatio ratio={3 / 2} className="overflow-hidden rounded-lg">
+        <img
+          class="w-full h-full rounded-lg hover:scale-103 transition-all cursor-pointer"
+          src={currentlyWorkngOn.imagePath}
+          alt={currentlyWorkngOn.title}
+        />
+      </AspectRatio>
+    </a>
+    <div class="flex-center gap-2">
+      <p>Currently working on</p>
+      <span class="block size-2 rounded-full bg-green-500"> </span>
+    </div>
   </div>
 </header>

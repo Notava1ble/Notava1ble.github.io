@@ -18,27 +18,7 @@ import { Badge } from "../ui/badge";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
 
-const projects = [
-  {
-    title: "Project One",
-    description:
-      "Description for project one. This description is a bit longer since it will be the first featured project and should stand out more.",
-    link: "https://example.com/project-one",
-    code: "https://github.com/user/project-one",
-  },
-  {
-    title: "Project Two",
-    description: "Description for project two.",
-    link: "https://example.com/project-two",
-    code: "https://github.com/user/project-two",
-  },
-  {
-    title: "Project Three",
-    description: "Description for project three.",
-    link: "https://example.com/project-three",
-    code: "https://github.com/user/project-three",
-  },
-];
+import projects from "@/lib/data/projects";
 ---
 
 <section class="w-1/2 mx-auto max-w-full mt-16" id="projects">
@@ -50,14 +30,12 @@ const projects = [
           <Card className="p-6 flex-center gap-6 col-span-2 group relative">
             <div class="flex-1 overflow-clip rounded-md relative h-full">
               <img
-                src={`https://placehold.co/800x450/f1f1f1/333333?text=${encodeURIComponent(
-                  project.title
-                )}&font=roboto`}
+                src={project.imagePath}
                 alt={project.title}
                 class="object-cover w-full rounded-md group-hover:scale-105 transition-all duration-200 group-hover:brightness-20"
               />
               <a
-                href={`/projects/${project.title.toLowerCase().replace(/\s+/g, "-")}`}
+                href={`/projects/${project.slug}`}
                 class={cn(
                   buttonVariants({ variant: "link" }),
                   "absolute top-1/2 left-1/2 -translate-1/2 z-100 hidden group-hover:inline-flex text-xl group-hover:underline"
@@ -70,29 +48,35 @@ const projects = [
               <div class="space-y-2">
                 <CardTitle>{project.title}</CardTitle>
                 <CardDescription>{project.description}</CardDescription>
-                <div class="flex gap-2 text-sm">
-                  <Badge variant="secondary">NextJs</Badge>
-                  <Badge variant="secondary">TypeScript</Badge>
-                  <Badge variant="secondary">Convex</Badge>
-                </div>
+                {project.techs && (
+                  <div class="flex gap-2 text-sm">
+                    {project.techs.map((tech) => (
+                      <Badge variant="secondary">{tech}</Badge>
+                    ))}
+                  </div>
+                )}
               </div>
               <div class="flex gap-4 mt-4">
-                <a
-                  href={project.link}
-                  target="_blank"
-                  class={cn(buttonVariants({ variant: "secondary" }))}
-                >
-                  <ExternalLink className="size-4" />
-                  View Live
-                </a>
-                <a
-                  href={project.code}
-                  target="_blank"
-                  class={cn(buttonVariants({ variant: "link" }))}
-                >
-                  <CodeXml className="size-4" />
-                  Code
-                </a>
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    class={cn(buttonVariants({ variant: "secondary" }))}
+                  >
+                    <ExternalLink className="size-4" />
+                    View Live
+                  </a>
+                )}
+                {project.code && (
+                  <a
+                    href={project.code}
+                    target="_blank"
+                    class={cn(buttonVariants({ variant: "link" }))}
+                  >
+                    <CodeXml className="size-4" />
+                    Code
+                  </a>
+                )}
               </div>
             </div>
           </Card>
@@ -108,14 +92,12 @@ const projects = [
                 className="overflow-clip rounded-md relative"
               >
                 <img
-                  src={`https://placehold.co/800x450/f1f1f1/333333?text=${encodeURIComponent(
-                    project.title
-                  )}&font=roboto`}
+                  src={project.imagePath}
                   alt={project.title}
                   class="object-cover w-full rounded-md group-hover:scale-105 group-hover:brightness-20 transition-all duration-200"
                 />
                 <a
-                  href={`/projects/${project.title.toLowerCase().replace(/\s+/g, "-")}`}
+                  href={`/projects/${project.slug}`}
                   class={cn(
                     buttonVariants({ variant: "link" }),
                     "absolute top-1/2 left-1/2 -translate-1/2 z-100 hidden group-hover:inline-flex text-xl group-hover:underline"
@@ -126,24 +108,28 @@ const projects = [
               </AspectRatio>
             </CardContent>
             <CardFooter className="justify-between">
-              <a
-                class="flex gap-2 text-sm text-muted-foreground hover:underline items-center"
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <SquareArrowOutUpRight className="size-4" />
-                View Live
-              </a>
-              <a
-                class="flex gap-2 text-sm text-muted-foreground hover:underline items-center"
-                href={project.code}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <CodeXml className="size-4" />
-                Code
-              </a>
+              {project.link && (
+                <a
+                  class="flex gap-2 text-sm text-muted-foreground hover:underline items-center"
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <SquareArrowOutUpRight className="size-4" />
+                  View Live
+                </a>
+              )}
+              {project.code && (
+                <a
+                  class="flex gap-2 text-sm text-muted-foreground hover:underline items-center"
+                  href={project.code}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <CodeXml className="size-4" />
+                  Code
+                </a>
+              )}
             </CardFooter>
           </Card>
         );
