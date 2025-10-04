@@ -1,6 +1,6 @@
-import hangmanImg from "@/assets/hangman-ranked-profile.png";
-import aiFlashcardsImg from "@/assets/ai-flashcards.jpg";
-import formulateImg from "@/assets/formulate-home-lorez.png";
+import hangmanImg from "@/assets/projectImages/hangman-ranked-profile.webp";
+import aiFlashcardsImg from "@/assets/projectImages/ai-flashcards.webp";
+import formulateImg from "@/assets/projectImages/formulate-home-lorez.webp";
 
 const projects = [
   {

@@ -1,4 +1,4 @@
-import hangmanImg from "../../assets/hangman-ranked-profile.png";
+import hangmanImg from "../../assets/projectImages/hangman-ranked-profile.webp";
 
 const currentlyWorkngOn = {
   title: "Hangman Ranked",
