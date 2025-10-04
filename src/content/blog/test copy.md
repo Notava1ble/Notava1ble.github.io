@@ -1,6 +1,6 @@
 ---
-title: "The first second post, even though it appears first"
-description: "This is the second test post, but it is actually created before the other one thats above."
+title: "The first Test Post. The Road to a finished blog."
+description: "This is the first test post, created only to test the ui before i actually pub sth."
 pubDate: "9/19/2025"
 tags: ["test", "UI"]
 ---
