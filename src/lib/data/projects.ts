@@ -15,7 +15,7 @@ const projects = [
     imagePath: hangmanImg,
   },
   {
-    title: "Ai Flashcards",
+    title: "AI Flashcards",
     slug: "ai-flashcards",
     description:
       "A script that uses the gemini api to generate flashcards from a set of notes.",
