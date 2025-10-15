@@ -15,65 +15,85 @@ import { cn } from "@/lib/utils";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+const years = Array.from(
+  new Set(posts.map((p) => p.data.pubDate.getFullYear()))
+).sort((a, b) => b - a);
+
+const postsByYear: Record<number, typeof posts> = Object.fromEntries(
+  years.map((y) => [y, posts.filter((p) => p.data.pubDate.getFullYear() === y)])
+);
 ---
 
 <Universal>
   <main class="w-1/2 mx-auto">
     <section class="max-w-full mt-16">
       <h1 class="text-3xl font-bold mb-8">Recent Blog Posts</h1>
-      <ul class="relative">
-        <div class="absolute top-0 left-0 bottom-0 w-1 bg-muted"></div>
-        {
-          posts.map((post, index) => (
-            <li
-              class={cn(
-                "ml-6 py-2",
-                index === 0
-                  ? "pb-4"
-                  : index === posts.length - 1
-                    ? "pt-4"
-                    : "py-4"
-              )}
-            >
-              <article
-                aria-labelledby={`post-${post.id}-title`}
-                class="flex flex-col gap-1"
-              >
-                <h2
-                  id={`post-${post.id}-title`}
-                  class="text-base font-medium leading-snug text-gray-100"
-                >
-                  <a
-                    href={`/blog/${post.id}`}
-                    class="focus:outline-none focus-visible:ring-1 focus-visible:ring-gray-500 rounded-sm hover:underline"
-                  >
-                    {post.data.title}
-                  </a>
-                </h2>
 
-                <p class="text-gray-400 text-sm leading-relaxed">
-                  {post.data.description}
-                </p>
-
-                <div class="flex flex-wrap items-center gap-2 text-gray-500 text-xs">
-                  <FormattedDate date={post.data.pubDate} />
-
-                  {Array.isArray(post.data.tags) &&
-                    post.data.tags.length > 0 && (
-                      <ul class="flex gap-1 items-center" aria-hidden>
-                        {post.data.tags.map((t) => (
-                          <li class="uppercase tracking-wider text-gray-400 bg-neutral-900 px-2 py-0.5 rounded-sm">
-                            {t}
-                          </li>
-                        ))}
-                      </ul>
+      {
+        years.map((y) => {
+          const yearPosts = postsByYear[y];
+          return (
+            <section class="mb-8">
+              <h2 class="text-xl font-semibold mb-4">{y}</h2>
+              <ul class="relative">
+                <div class="absolute top-0 left-0 bottom-0 w-1 bg-muted" />
+                {yearPosts.map((post, index) => (
+                  <li
+                    class={cn(
+                      "ml-6 py-2",
+                      index === 0
+                        ? "pb-4"
+                        : index === yearPosts.length - 1
+                          ? "pt-4"
+                          : "py-4"
                     )}
-                </div>
-              </article>
-            </li>
-          ))
-        }
-      </ul>
+                  >
+                    <article
+                      aria-labelledby={`post-${post.id}-title`}
+                      class="flex flex-col gap-1"
+                    >
+                      <h2
+                        id={`post-${post.id}-title`}
+                        class="text-base font-medium leading-snug text-gray-100"
+                      >
+                        <a
+                          href={`/blog/${post.id}`}
+                          class="focus:outline-none focus-visible:ring-1 focus-visible:ring-gray-500 rounded-sm hover:underline"
+                        >
+                          {post.data.title}
+                        </a>
+                      </h2>
+
+                      <p class="text-gray-400 text-sm leading-relaxed">
+                        {post.data.description}
+                      </p>
+
+                      <div class="flex flex-wrap items-center gap-2 text-gray-500 text-xs">
+                        <FormattedDate date={post.data.pubDate} />
+
+                        {Array.isArray(post.data.tags) &&
+                          post.data.tags.length > 0 && (
+                            <ul
+                              class="flex gap-1 items-center"
+                              aria-hidden={true}
+                            >
+                              {post.data.tags.map((t) => (
+                                <li class="uppercase tracking-wider text-gray-400 bg-neutral-900 px-2 py-0.5 rounded-sm">
+                                  {t}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                      </div>
+                    </article>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          );
+        })
+      }
     </section>
   </main>
 </Universal>
