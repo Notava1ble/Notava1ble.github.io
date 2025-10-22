@@ -35,15 +35,17 @@ import { Image } from "astro:assets";
                 alt={project.title}
                 class="object-cover w-full rounded-md group-hover:scale-105 transition-all duration-200 group-hover:brightness-20"
               />
-              <a
-                href={`/projects/${project.slug}`}
-                class={cn(
-                  buttonVariants({ variant: "link" }),
-                  "absolute top-1/2 left-1/2 -translate-1/2 z-100 hidden group-hover:inline-flex text-xl hover:underline"
-                )}
-              >
-                Read More <ArrowRight className="size-6" />
-              </a>
+              {project.readMore && (
+                <a
+                  href={project.readMore}
+                  class={cn(
+                    buttonVariants({ variant: "link" }),
+                    "absolute top-1/2 left-1/2 -translate-1/2 z-100 hidden group-hover:inline-flex text-xl hover:underline"
+                  )}
+                >
+                  Read More <ArrowRight className="size-6" />
+                </a>
+              )}
             </div>
             <div class="flex-1 h-full flex flex-col items-start justify-between">
               <div class="space-y-2">
@@ -97,15 +99,17 @@ import { Image } from "astro:assets";
                   alt={project.title}
                   class="object-cover w-full rounded-md group-hover:scale-105 group-hover:brightness-20 transition-all duration-200"
                 />
-                <a
-                  href={`/projects/${project.slug}`}
-                  class={cn(
-                    buttonVariants({ variant: "link" }),
-                    "absolute top-1/2 left-1/2 -translate-1/2 z-100 hidden group-hover:inline-flex text-xl hover:underline"
-                  )}
-                >
-                  Read More <ArrowRight className="size-6" />
-                </a>
+                {project.readMore && (
+                  <a
+                    href={project.readMore}
+                    class={cn(
+                      buttonVariants({ variant: "link" }),
+                      "absolute top-1/2 left-1/2 -translate-1/2 z-100 hidden group-hover:inline-flex text-xl hover:underline"
+                    )}
+                  >
+                    Read More <ArrowRight className="size-6" />
+                  </a>
+                )}
               </AspectRatio>
             </CardContent>
             <CardFooter className="justify-between">

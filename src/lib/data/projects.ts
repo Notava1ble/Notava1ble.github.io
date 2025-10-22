@@ -10,6 +10,7 @@ const projects = [
       "A ranked twist on the classic Hangman game, featuring a matchmaking and scoring system. Players compete to guess words faster to climb the ranks.",
     techs: ["NextJs", "TypeScript", "Convex"],
     status: "Production",
+    readMore: "/blog/hangmanRankedDetails/",
     link: "https://hangman-ranked.vercel.app/",
     code: "https://github.com/Notava1ble/hangman-ranked",
     imagePath: hangmanImg,
