@@ -1,7 +1,7 @@
 ---
 title: "How I made a ranked game from scratch!"
 description: "Take a look on how I created Hangman Ranked, a revamp to a game we all know."
-pubDate: "9/19/2025"
+pubDate: "10/22/2025"
 tags: ["projects"]
 ---
 
