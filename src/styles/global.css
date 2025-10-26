@@ -176,6 +176,7 @@ body {
 
 html {
   scroll-padding-top: 80px; /* navbar height */
+  scroll-behavior: smooth;
 }
 
 @layer base {
