@@ -33,7 +33,10 @@ import { Image } from "astro:assets";
               <Image
                 src={project.imagePath}
                 alt={project.title}
-                class="object-cover w-full rounded-md group-hover:scale-105 transition-all duration-200 group-hover:brightness-20"
+                class={cn(
+                  "object-cover w-full rounded-md group-hover:scale-105 transition-all duration-200",
+                  project.readMore && "group-hover:brightness-20"
+                )}
               />
               {project.readMore && (
                 <a
@@ -97,7 +100,10 @@ import { Image } from "astro:assets";
                 <Image
                   src={project.imagePath}
                   alt={project.title}
-                  class="object-cover w-full rounded-md group-hover:scale-105 group-hover:brightness-20 transition-all duration-200"
+                  class={cn(
+                    "object-cover w-full rounded-md group-hover:scale-105 transition-all duration-200",
+                    project.readMore && "group-hover:brightness-20"
+                  )}
                 />
                 {project.readMore && (
                   <a
