@@ -1,32 +1,10 @@
 ---
 import "../styles/global.css";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
-import BaseHead from "@/components/BaseHead.astro";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import Universal from "@/layouts/Universal.astro";
 import Header from "@/components/sections/Header.astro";
-import About from "@/components/sections/About.astro";
 import Seperator from "@/components/common/Seperator.astro";
 import Projects from "@/components/sections/Projects.astro";
 import Contact from "@/components/sections/Contact.astro";
-import Footer from "@/components/sections/Footer.astro";
 ---
 
 <Universal>
@@ -37,5 +15,4 @@ import Footer from "@/components/sections/Footer.astro";
   <Projects />
   <Seperator />
   <Contact />
-  <Footer />
 </Universal>
