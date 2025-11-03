@@ -18,89 +18,82 @@ const postsByYear: Record<number, typeof posts> = Object.fromEntries(
 ---
 
 <Universal>
-  <main
-    id="content"
-    class="w-1/2 mx-auto"
-    tabindex="-1"
-    aria-labelledby="page-title"
-  >
-    <section class="max-w-full mt-16">
-      <h1 id="page-title" class="text-3xl font-bold mb-8">Recent blog posts</h1>
+  <section class="max-w-full mt-12">
+    <h1 id="page-title" class="text-3xl font-bold mb-8">Recent blog posts</h1>
 
-      {
-        years.map((y) => {
-          const yearPosts = postsByYear[y];
-          return (
-            <section class="mb-8">
-              <h2 class="text-xl font-semibold mb-4">{y}</h2>
-              <ul class="relative" role="list">
-                <div
-                  class="absolute top-0 left-0 bottom-0 w-1 bg-muted"
-                  aria-hidden="true"
-                />
-                {yearPosts.map((post, index) => (
-                  <li
-                    class={cn(
-                      "ml-6 py-2",
-                      index === 0
-                        ? "pb-4"
-                        : index === yearPosts.length - 1
-                          ? "pt-4"
-                          : "py-4"
-                    )}
-                    role="listitem"
+    {
+      years.map((y) => {
+        const yearPosts = postsByYear[y];
+        return (
+          <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4">{y}</h2>
+            <ul class="relative" role="list">
+              <div
+                class="absolute top-0 left-0 bottom-0 w-1 bg-muted"
+                aria-hidden="true"
+              />
+              {yearPosts.map((post, index) => (
+                <li
+                  class={cn(
+                    "ml-6 py-2",
+                    index === 0
+                      ? "pb-4"
+                      : index === yearPosts.length - 1
+                        ? "pt-4"
+                        : "py-4"
+                  )}
+                  role="listitem"
+                >
+                  <article
+                    aria-labelledby={`post-${post.id}-title`}
+                    class="flex flex-col gap-1"
                   >
-                    <article
-                      aria-labelledby={`post-${post.id}-title`}
-                      class="flex flex-col gap-1"
+                    <h3
+                      id={`post-${post.id}-title`}
+                      class="text-base font-medium leading-snug text-gray-100"
                     >
-                      <h3
-                        id={`post-${post.id}-title`}
-                        class="text-base font-medium leading-snug text-gray-100"
+                      <a
+                        href={`/blog/${post.id}`}
+                        class="focus:outline-none focus-visible:ring-1 focus-visible:ring-gray-500 rounded-sm hover:underline"
                       >
-                        <a
-                          href={`/blog/${post.id}`}
-                          class="focus:outline-none focus-visible:ring-1 focus-visible:ring-gray-500 rounded-sm hover:underline"
-                        >
-                          {post.data.title}
-                        </a>
-                      </h3>
+                        {post.data.title}
+                      </a>
+                    </h3>
 
-                      <p class="text-gray-400 text-sm leading-relaxed">
-                        {post.data.description}
-                      </p>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                      {post.data.description}
+                    </p>
 
-                      <div class="flex flex-wrap items-center gap-2 text-gray-500 text-xs">
-                        <FormattedDate date={post.data.pubDate} />
+                    <div class="flex flex-wrap items-center gap-2 text-gray-500 text-xs">
+                      <FormattedDate date={post.data.pubDate} />
 
-                        {Array.isArray(post.data.tags) &&
-                          post.data.tags.length > 0 && (
-                            <ul
-                              class="flex gap-1 items-center"
-                              aria-label={`Tags for ${post.data.title}`}
-                            >
-                              {post.data.tags.map((t) => (
-                                <li>
-                                  <span class="sr-only">Tag:</span>
-                                  <span
-                                    class="uppercase tracking-wider text-gray-400 bg-neutral-900 px-2 py-0.5 rounded-sm"
-                                    aria-hidden="false"
-                                  >
-                                    {t}
-                                  </span>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                      </div>
-                    </article>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          );
-        })
-      }
-    </section>
-  </main>
+                      {Array.isArray(post.data.tags) &&
+                        post.data.tags.length > 0 && (
+                          <ul
+                            class="flex gap-1 items-center"
+                            aria-label={`Tags for ${post.data.title}`}
+                          >
+                            {post.data.tags.map((t) => (
+                              <li>
+                                <span class="sr-only">Tag:</span>
+                                <span
+                                  class="uppercase tracking-wider text-gray-400 bg-neutral-900 px-2 py-0.5 rounded-sm"
+                                  aria-hidden="false"
+                                >
+                                  {t}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                    </div>
+                  </article>
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })
+    }
+  </section>
 </Universal>

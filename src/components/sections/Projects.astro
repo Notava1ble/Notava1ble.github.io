@@ -22,14 +22,14 @@ import projects from "@/lib/data/projects";
 import { Image } from "astro:assets";
 ---
 
-<section class="w-1/2 mx-auto max-w-full mt-16" id="projects">
+<section class="max-w-full mt-16" id="projects">
   <h2 class="font-semibold text-2xl mb-4">Projects</h2>
   <div class="grid grid-cols-2 gap-x-5 gap-y-6 w-full max-w-full">
     {
       projects.map((project, i) => {
         return i === 0 ? (
           <Card className="p-6 flex-center gap-6 col-span-2 group relative">
-            <div class="flex-1 overflow-clip rounded-md relative h-full">
+            <div class="flex-1 overflow-clip rounded-md relative h-full hidden md:block">
               <Image
                 src={project.imagePath}
                 alt={project.title}
@@ -50,49 +50,55 @@ import { Image } from "astro:assets";
                 </a>
               )}
             </div>
-            <div class="flex-1 h-full flex flex-col items-start justify-between">
+            <div class="flex-1 h-full flex flex-col items-start gap-4 md:gap-2">
               <div class="space-y-2">
-                <CardTitle>{project.title}</CardTitle>
-                <CardDescription>{project.description}</CardDescription>
+                <CardTitle>
+                  <a href={project.readMore}>{project.title}</a>
+                </CardTitle>
+                <CardDescription className="line-clamp-3">
+                  {project.description}
+                </CardDescription>
+              </div>
+              <div class="flex md:flex-col md:gap-4 justify-between w-full items-center md:items-start md:align-star h-full">
                 {project.techs && (
-                  <div class="flex gap-2 text-sm">
+                  <div class="space-x-2 text-sm hidden sm:block">
                     {project.techs.map((tech) => (
                       <Badge variant="secondary">{tech}</Badge>
                     ))}
                   </div>
                 )}
-              </div>
-              <div class="flex gap-4 mt-4">
-                {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    class={cn(buttonVariants({ variant: "secondary" }))}
-                  >
-                    <ExternalLink className="size-4" />
-                    View Live
-                  </a>
-                )}
-                {project.code && (
-                  <a
-                    href={project.code}
-                    target="_blank"
-                    class={cn(buttonVariants({ variant: "link" }))}
-                  >
-                    <CodeXml className="size-4" />
-                    Code
-                  </a>
-                )}
+                <div class="flex gap-4">
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      class={cn(buttonVariants({ variant: "secondary" }))}
+                    >
+                      <ExternalLink className="size-4" />
+                      View Live
+                    </a>
+                  )}
+                  {project.code && (
+                    <a
+                      href={project.code}
+                      target="_blank"
+                      class={cn(buttonVariants({ variant: "link" }))}
+                    >
+                      <CodeXml className="size-4" />
+                      Code
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           </Card>
         ) : (
-          <Card className="group">
+          <Card className="group col-span-2 md:col-span-1">
             <CardHeader>
               <CardTitle>{project.title}</CardTitle>
               <CardDescription>{project.description}</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="hidden md:block">
               <AspectRatio
                 ratio={16 / 9}
                 className="overflow-clip rounded-md relative"
