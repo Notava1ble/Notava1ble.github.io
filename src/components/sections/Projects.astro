@@ -22,13 +22,14 @@ import projects from "@/lib/data/projects";
 import { Image } from "astro:assets";
 ---
 
-<section class="max-w-full mt-16" id="projects">
+<section class="max-w-full mt-16 overflow-hidden" id="projects">
   <h2 class="font-semibold text-2xl mb-4">Projects</h2>
-  <div class="grid grid-cols-2 gap-x-5 gap-y-6 w-full max-w-full">
+  <div class="grid grid-cols-2 gap-x-5 gap-y-6 w-full max-w-full min-w-0">
     {
       projects.map((project, i) => {
+        const titleHref = project.readMore ?? project.link;
         return i === 0 ? (
-          <Card className="p-6 flex-center gap-6 col-span-2 group relative">
+          <Card className="p-6 flex-center gap-6 col-span-2 group relative min-w-0">
             <div class="flex-1 overflow-clip rounded-md relative h-full hidden md:block">
               <Image
                 src={project.imagePath}
@@ -50,12 +51,22 @@ import { Image } from "astro:assets";
                 </a>
               )}
             </div>
-            <div class="flex-1 h-full flex flex-col items-start gap-4 md:gap-2">
+            <div class="flex-1 h-full flex flex-col items-start gap-4 md:gap-2 min-w-0">
               <div class="space-y-2">
                 <CardTitle>
-                  <a href={project.readMore}>{project.title}</a>
+                  {titleHref ? (
+                    <a
+                      href={titleHref}
+                      target={project.readMore ? undefined : "_blank"}
+                      rel={project.readMore ? undefined : "noopener noreferrer"}
+                    >
+                      {project.title}
+                    </a>
+                  ) : (
+                    project.title
+                  )}
                 </CardTitle>
-                <CardDescription className="line-clamp-3">
+                <CardDescription className="break-words">
                   {project.description}
                 </CardDescription>
               </div>
@@ -93,10 +104,12 @@ import { Image } from "astro:assets";
             </div>
           </Card>
         ) : (
-          <Card className="group col-span-2 md:col-span-1">
-            <CardHeader>
+          <Card className="group col-span-2 md:col-span-1 min-w-0 overflow-hidden">
+            <CardHeader className="min-w-0">
               <CardTitle>{project.title}</CardTitle>
-              <CardDescription>{project.description}</CardDescription>
+              <CardDescription className="break-words">
+                {project.description}
+              </CardDescription>
             </CardHeader>
             <CardContent className="hidden md:block">
               <AspectRatio
@@ -124,7 +137,7 @@ import { Image } from "astro:assets";
                 )}
               </AspectRatio>
             </CardContent>
-            <CardFooter className="justify-between">
+            <CardFooter className="justify-between gap-3 flex-wrap">
               {project.link && (
                 <a
                   class="flex gap-2 text-sm text-muted-foreground hover:underline items-center"

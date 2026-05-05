@@ -1,0 +1,76 @@
+---
+title: "How I Built Mjeksia Online"
+description: "How I built Mjeksia Online, an Android app that helps medical students in Albania prepare for exams."
+pubDate: "2026-05-05"
+tags: ["projects"]
+# heroImage: "../../assets/projectImages/image.png"
+---
+
+After months of work, I’m proud to finally share Mjeksia Online, an Android app I built to help medical students in Albania prepare for their exams. To celebrate that, I wanted to write a bit about how it came together, what went wrong, and what I learned while building it.
+
+## Initial Idea
+
+The original idea came from those driving license mock exam apps.
+
+I really liked how they worked: all the questions in one place, the ability to practice over and over, review mistakes, and slowly improve by repetition. It felt way more effective than just staring at a book. At some point I caught myself thinking: it would be amazing if school exam prep felt like this too.
+
+Then one evening I found out that the question bank for the medical exam was publicly available online through [QSHA](https://qsha.gov.al/provimi-i-informatizuar-i-mjekesise/). It was spread across more than twenty PDFs, full of thousands of questions, images, formulas, and tables. At that moment, it clicked. I already had the mental model from the driving exam apps, so now it was just a matter of building the medical version of it. As winter break started, I locked in and got to work.
+
+## Extracting the Data
+
+Without a doubt, this was the hardest part of the whole project.
+
+Turning a messy collection of PDFs into clean, machine-readable JSON sounds simple until you actually try it. These files had everything: overlapping text, inconsistent formatting, images in awkward places, math formulas, chemical compounds, and tables that did not always behave the way you’d expect.
+
+I started with the obvious approach: write a custom Python script, extract the text, split it into questions, and crop the images using bounding boxes. In theory, that sounded reasonable. In practice, it fell apart pretty quickly. Formulas got mangled, some images were cropped incorrectly, and question alternatives were not always parsed the way they should have been.
+
+After that, I tried [Marker](https://github.com/datalab-to/marker), which converts PDFs into markdown. I ran it on Google Colab for hours, and the results were honestly better than I expected. But still, the inconsistency of the source material kept causing problems.
+
+In the end, I leaned on LLMs. I was skeptical at first because the dataset was huge, but the model handled the messy formatting much better than my earlier attempts. It was especially good at working through formulas, chemical notation, and tables without completely breaking the structure. It still wasn’t perfect, but it got me from “this is a mess” to “this is actually usable.” From there, with a custom image extraction script and some manual cleanup, I finally had a question bank I could build on.
+
+## Tech Stack
+
+I already knew I didn’t want to use Flutter. It never felt right for the way I like to build things. I’ve had a rough experience with it before, and for this project I wanted something that felt closer to the tools I already enjoyed using.
+
+So I went with React Native + Expo. It was my first time using it, but since it sits much closer to React and TypeScript, it felt like the most natural choice. I also used Expo Router for navigation and NativeWind for styling, which made the setup feel familiar pretty quickly. On the data side, the app uses Expo SQLite and Drizzle ORM, which ended up being a really nice fit for keeping everything local and fast.
+
+## Biggest Problem
+
+Believe it or not, the biggest problem by far was rendering LaTeX in a way I was actually happy with.
+
+I ruled out WebViews pretty early. They worked, technically, but the result didn’t feel native and the performance wasn’t great. I also tried packages that render math more directly inside React Native, but none of them gave me the level of control I wanted.
+
+So I ended up with a weird but effective solution. Instead of rendering formulas live in the app, I pre-generated the math as SVGs ahead of time. Each formula gets hashed, and the app uses that hash to find the matching SVG locally. Then, inside React Native, I split the question text into normal text and math pieces, look up the right SVG, and render it inline. That gave me the best of both worlds: the formulas looked consistent, performance was smooth, and I still had styling control because at the end of the day it was just SVG.
+
+That said, this part still has a couple of rough edges:
+
+- Some long chemical formulas still go off-screen, so they need horizontal scrolling.
+- Aligning SVG math cleanly inside text was way harder than I expected. Since the SVG baseline and the actual visual baseline of the formula don’t perfectly match, I had to manually compensate for it. It works most of the time, but taller formulas can still be awkward.
+
+## Settings
+
+This was my first time creating a settings system, and it was the process I enjoyed the most.
+
+Initially, I was just using a key-value store to store a setting in the settings page, and read it in the component that needed it. However, if I would want to modify a setting, all components reading it had to change. This is was not ideal in the long run, obvious that it couldn't scale.
+
+I modified the entire system. Instead of treating them like random flags scattered across the app, I built a central settings registry. Every setting has one source of truth: its key, type, default value, and available options. Then I added a separate schema whose only job is to describe how those settings should be grouped and shown in the UI. That let me organize everything into sections like appearance and test preferences, while keeping the actual logic clean underneath. The current schema includes appearance controls, test preferences, and multiple theme options.
+
+The values are persisted locally using Expo’s SQLite-backed key-value storage, and the components subscribe only to the settings they care about. That means when I add or change a setting, I don’t have to go chasing logic all over the codebase anymore. I define it once, wire it into the settings screen, and the rest of the app can react to it in a much cleaner way.
+
+Also, yes, I may have gone a little overboard with themes. But I regret nothing.
+
+## The App Itself
+
+I am very happy how the final product turned out. You can browse all 3000 questions, attempt each one in its own, or get tested on a specific topic. The main part is mock tests, where the app gets random questions from the bank, and you have to answer all within a time limit, simulating the exam environment.
+
+My favorite part by far is the mistakes screen. Apart from statistics and past tests, it shows a list of all mistakes you have made. Instead of just showing you that you got something wrong and moving on, the app lets you come back to those mistakes and focus on them directly
+
+> We learn by practicing our mistakes.
+
+## Final Thoughts
+
+This project taught me that the hardest part of making something useful usually is not the UI. It’s dealing with messy real-world data, making tradeoffs when no option is perfect, and sticking with a problem long enough to find a solution that feels right.
+
+The [first release](https://github.com/Notava1ble/mjeksia-online/releases/tag/v1.0.2) of the app is now out, and the biggest priority from here is improving the question and answer quality. I still want to polish a few more details and keep refining the data, but I'm proud of where it is now because it already does what I hoped it would do: take a huge, intimidating question bank and turn it into something more approachable, more interactive, and honestly more enjoyable to study with.
+
+And more than anything, I’m just happy that an idea I had one evening actually became a real app people can use.
