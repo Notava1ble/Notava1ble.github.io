@@ -21,6 +21,7 @@ const projects = [
       "An offline Android study app for Albanian medical students preparing for the state exam, with the official question bank, mock exams, review, history, and explanations.",
     techs: ["Expo", "React Native", "SQLite"],
     status: "Android",
+    readMore: "/blog/mjeksiaonlinedetails/",
     code: "https://github.com/Notava1ble/mjeksia-online",
     imagePath: mjeksiaImg,
   },
