@@ -22,10 +22,10 @@ const { title, description, image } = Astro.props;
       image={image}
     />
   </head>
-  <body class="flex flex-col min-h-screen dark pb-12">
+  <body class="flex flex-col min-h-screen dark pb-12 overflow-x-hidden">
     <Navbar />
     <main
-      class="flex-1 mx-auto xl:w-1/2 md:w-3/4 w-7/8"
+      class="flex-1 mx-auto xl:w-1/2 md:w-3/4 w-7/8 max-w-[calc(100vw-2rem)] min-w-0"
       id="content"
       tabindex="-1"
       aria-labelledby="page-title"

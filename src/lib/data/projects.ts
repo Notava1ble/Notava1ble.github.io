@@ -1,37 +1,40 @@
 import hangmanImg from "@/assets/projectImages/hangman-ranked-profile.webp";
-import aiFlashcardsImg from "@/assets/projectImages/ai-flashcards.webp";
-import formulateImg from "@/assets/projectImages/formulate-home-lorez.webp";
+import mcRankedLeaguesImg from "@/assets/projectImages/mc-ranked-leagues.png";
+import mjeksiaImg from "@/assets/projectImages/image.png";
 
 const projects = [
+  {
+    title: "MC Ranked Leagues",
+    slug: "mscl-website",
+    description:
+      "Public scoreboard for a Minecraft speedrunning league with around 1,300 players, covering standings, match history, player stats, and the entire data layer for the event.",
+    techs: ["Astro", "React", "Convex"],
+    status: "Production",
+    link: "https://mscl.pages.dev/",
+    code: "https://github.com/Notava1ble/mscl-website",
+    imagePath: mcRankedLeaguesImg,
+  },
+  {
+    title: "Mjeksia Online",
+    slug: "mjeksia-online",
+    description:
+      "An offline Android study app for Albanian medical students preparing for the state exam, with the official question bank, mock exams, review, history, and explanations.",
+    techs: ["Expo", "React Native", "SQLite"],
+    status: "Android",
+    code: "https://github.com/Notava1ble/mjeksia-online",
+    imagePath: mjeksiaImg,
+  },
   {
     title: "Hangman Ranked",
     slug: "hangman-ranked",
     description:
-      "A ranked twist on the classic Hangman game, featuring a matchmaking and scoring system. Players compete to guess words faster to climb the ranks.",
+      "Real-time Hangman with matchmaking, Elo, solo stats, profiles, and server-side timeouts. It became my playground for learning realtime game logic.",
     techs: ["NextJs", "TypeScript", "Convex"],
     status: "Production",
     readMore: "/blog/hangmanrankeddetails/",
     link: "https://hangman-ranked.vercel.app/",
     code: "https://github.com/Notava1ble/hangman-ranked",
     imagePath: hangmanImg,
-  },
-  {
-    title: "AI Flashcards",
-    slug: "ai-flashcards",
-    description:
-      "A script that uses the gemini api to generate flashcards from a set of notes.",
-    status: "Not maintained",
-    code: "https://github.com/Notava1ble/aiflashcards",
-    imagePath: aiFlashcardsImg,
-  },
-  {
-    title: "Formulate",
-    slug: "formulate",
-    description:
-      "Create a collection to store all your notes. Designed for simplicity and quick access",
-    status: "Work in progress",
-    code: "https://github.com/Notava1ble/formulate",
-    imagePath: formulateImg,
   },
 ];
 
